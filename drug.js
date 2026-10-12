@@ -39,7 +39,7 @@ export class Drug {
    * Increases benefit without exceeding the maximum of 50.
    * @param {number} [amount=1]
    */
-  increaseBenefit(amount = 1) {
+  _increaseBenefit(amount = 1) {
     this.benefit = Math.min(MAX_BENEFIT, this.benefit + amount);
   }
 
@@ -47,14 +47,14 @@ export class Drug {
    * Decreases benefit without going below 0.
    * @param {number} [amount=1]
    */
-  decreaseBenefit(amount = 1) {
+  _decreaseBenefit(amount = 1) {
     this.benefit = Math.max(MIN_BENEFIT, this.benefit - amount);
   }
 
   /**
    * Ages the drug by one day.
    */
-  age() {
+  _age() {
     this.expiresIn -= 1;
   }
 
@@ -63,11 +63,11 @@ export class Drug {
    * and 1 more after the expiration date.
    */
   updateBenefitValue() {
-    this.decreaseBenefit();
-    this.age();
+    this._decreaseBenefit();
+    this._age();
 
     if (this.expiresIn < 0) {
-      this.decreaseBenefit();
+      this._decreaseBenefit();
     }
   }
 }
@@ -80,11 +80,11 @@ class HerbalTea extends Drug {
    * Gains 1 benefit per day, and 1 more after expiry.
    */
   updateBenefitValue() {
-    this.increaseBenefit();
-    this.age();
+    this._increaseBenefit();
+    this._age();
 
     if (this.expiresIn < 0) {
-      this.increaseBenefit();
+      this._increaseBenefit();
     }
   }
 }
@@ -98,17 +98,17 @@ class Fervex extends Drug {
    * benefit becomes 0 after the expiration date.
    */
   updateBenefitValue() {
-    this.increaseBenefit();
+    this._increaseBenefit();
 
     if (this.expiresIn < 11) {
-      this.increaseBenefit();
+      this._increaseBenefit();
     }
 
     if (this.expiresIn < 6) {
-      this.increaseBenefit();
+      this._increaseBenefit();
     }
 
-    this.age();
+    this._age();
 
     if (this.expiresIn < 0) {
       this.benefit = 0;
@@ -120,7 +120,7 @@ class Fervex extends Drug {
  * Magic Pill never expires and never changes benefit.
  */
 class MagicPill extends Drug {
-  age() {
+  _age() {
     // Magic Pill never expires.
   }
 
@@ -137,11 +137,11 @@ class Dafalgan extends Drug {
    * Loses 2 benefit per day, and 2 more after the expiration date.
    */
   updateBenefitValue() {
-    this.decreaseBenefit(2);
-    this.age();
+    this._decreaseBenefit(2);
+    this._age();
 
     if (this.expiresIn < 0) {
-      this.decreaseBenefit(2);
+      this._decreaseBenefit(2);
     }
   }
 }
