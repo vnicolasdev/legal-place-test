@@ -4,6 +4,7 @@ const MIN_BENEFIT = 0;
 const HERBAL_TEA = "Herbal Tea";
 const FERVEX = "Fervex";
 const MAGIC_PILL = "Magic Pill";
+const DAFALGAN = "Dafalgan";
 
 /**
  * A pharmacy item with an expiration window and benefit strength.
@@ -25,6 +26,8 @@ export class Drug {
         return new Fervex(name, expiresIn, benefit);
       case MAGIC_PILL:
         return new MagicPill(name, expiresIn, benefit);
+      case DAFALGAN:
+        return new Dafalgan(name, expiresIn, benefit);
       default:
         this.name = name;
         this.expiresIn = expiresIn;
@@ -123,5 +126,22 @@ class MagicPill extends Drug {
 
   updateBenefitValue() {
     // Intentionally left unchanged.
+  }
+}
+
+/**
+ * Dafalgan degrades in benefit twice as fast as normal drugs.
+ */
+class Dafalgan extends Drug {
+  /**
+   * Loses 2 benefit per day, and 2 more after the expiration date.
+   */
+  updateBenefitValue() {
+    this.decreaseBenefit(2);
+    this.age();
+
+    if (this.expiresIn < 0) {
+      this.decreaseBenefit(2);
+    }
   }
 }

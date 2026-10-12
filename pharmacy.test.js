@@ -106,4 +106,29 @@ describe("Pharmacy", () => {
     });
   });
 
+  describe("Dafalgan", () => {
+    it("degrades benefit twice as fast as normal drugs before expiry", () => {
+      const drugs = [new Drug("Dafalgan", 10, 20)];
+
+      const result = new Pharmacy(drugs).updateBenefitValue();
+
+      expect(result).toEqual([new Drug("Dafalgan", 9, 18)]);
+    });
+
+    it("degrades benefit twice as fast as normal drugs after expiry", () => {
+      const drugs = [new Drug("Dafalgan", 0, 20)];
+
+      const result = new Pharmacy(drugs).updateBenefitValue();
+
+      expect(result).toEqual([new Drug("Dafalgan", -1, 16)]);
+    });
+
+    it("never lets benefit go below 0", () => {
+      const drugs = [new Drug("Dafalgan", 5, 1)];
+
+      const result = new Pharmacy(drugs).updateBenefitValue();
+
+      expect(result).toEqual([new Drug("Dafalgan", 4, 0)]);
+    });
+  });
 });
