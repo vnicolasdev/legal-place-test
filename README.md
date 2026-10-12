@@ -23,12 +23,14 @@ We have recently signed a supplier of "Dafalgan". This requires an update to our
 
 - "Dafalgan" degrades in Benefit twice as fast as normal drugs.
 
+
+
 ## Instructions
 
-- [ ] Create a clone from this repository
-- [ ] Implement the required feature
-- [ ] Push the clone to your own repository when satisfied
-- [ ] Send us the link and tell us approximatively how much time you spent on this assignment
+- [x] Create a clone from this repository
+- [x] Implement the required feature
+- [x] Push the clone to your own repository when satisfied
+- [x] Send us the link and tell us approximatively how much time you spent on this assignment
 
 You are encouraged to refactor the existing code before adding your own, as you would do if this was a real task in real life. We strongly recommend that you write tests to help you during this process.
 
@@ -40,8 +42,9 @@ We expect you to spend no more than 2 hours on this assignment. We value the qua
 
 ## Test
 
-To make sure that you will not break anything in the existing code, we added the result of the simulation in the _output.json_ file. Make sure that your code is able to generate a file with identical content. You can generate a new file by running the following command:
+To make sure that you will not break anything in the existing code, we added the result of the simulation in the *output.json* file. Make sure that your code is able to generate a file with identical content. You can generate a new file by running the following command:
 
 ```sh
 yarn start
 ```
+
